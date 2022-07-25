@@ -185,12 +185,15 @@ function returnRoleString(roleStr) {
  * If is present in the API results
  */
 function revealReps(districts) {
-  var reps = document.querySelector(".ga-members-list-wrapper .w-dyn-items").querySelectorAll(".ga-members-item"); 
-  reps.forEach(function(content) {
-    let memberDistrict = content.querySelector(".c-district").querySelector(".district-number").innerHTML;
-    if(districts.includes(memberDistrict)) {
-      content.style.display = "block";
-    }
+  let reps_container = document.querySelectorAll(".ga-members-list-wrapper .w-dyn-items");
+  reps_container.forEach(function(container) {
+    let reps = container.querySelectorAll(".ga-members-item"); 
+    reps.forEach(function(content) {
+      let memberDistrict = content.querySelector(".c-district").querySelector(".district-number").innerHTML;
+      if(districts.includes(memberDistrict)) {
+        content.style.display = "block";
+      }
+    });
   });
 }
 
@@ -200,9 +203,12 @@ function revealReps(districts) {
  * to wait for a new results set
  */
  function hideReps() {
-  var reps = document.querySelector(".ga-members-list-wrapper .w-dyn-items").querySelectorAll(".ga-members-item"); 
-  reps.forEach(function(content) {
-    content.style.display = "none";
+  var reps_container = document.querySelectorAll(".ga-members-list-wrapper .w-dyn-items");
+  reps_container.forEach(function(container) {
+    let reps = container.querySelectorAll(".ga-members-item"); 
+    reps.forEach(function(content) {
+      content.style.display = "none";
+    });
   });
 }
 
@@ -214,7 +220,7 @@ function revealReps(districts) {
   reps.forEach(function(content) {
     let memberScoreContainer = content.querySelector(".link-block").querySelector(".ga-member-block").querySelector(".ga-member-score")
     let memberGrade = memberScoreContainer.innerHTML;
-    if (memberGrade == 'A') {
+    if (memberGrade == 'A' || memberGrade == 'A+') {
         memberScoreContainer.style.background = '#52A845';
     }
   });
