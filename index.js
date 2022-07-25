@@ -90,7 +90,7 @@ var resultsContainer;
  */
  function displayResults(result) {
   document.getElementById("loader").className = "invisible";
-  (result.officials) ? '' : displayError("No results found");
+  (result.officials) ? resultsContainer.innerHTML = normalizedInput(result) + officials(result) : displayError("No results found");
 }
 
 /**
