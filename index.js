@@ -91,7 +91,6 @@ var resultsContainer;
  function displayResults(result) {
   document.getElementById("loader").className = "invisible";
   (result.officials) ? resultsContainer.innerHTML = normalizedInput(result) + officials(result) : displayError("No results found");
-  console.log(officials(result));
 }
 
 /**
@@ -145,10 +144,6 @@ function normalizedInput(result) {
   });
 
   officials_html += "</div>";
-
-  console.log('========================');
-  console.log(found_reps);
-  console.log('========================');
 
   revealReps(found_reps);
 
@@ -224,12 +219,15 @@ function revealReps(found_reps) {
  * This function color the representative grade
  */
  function colorGrade() {
-  var reps = document.querySelector(".ga-members-list-wrapper .w-dyn-items").querySelectorAll(".ga-members-item"); 
-  reps.forEach(function(content) {
-    let memberScoreContainer = content.querySelector(".link-block").querySelector(".ga-member-block").querySelector(".ga-member-score")
-    let memberGrade = memberScoreContainer.innerHTML;
-    if (memberGrade == 'A' || memberGrade == 'A+') {
-        memberScoreContainer.style.background = '#52A845';
-    }
+  var reps_container = document.querySelectorAll(".ga-members-list-wrapper .w-dyn-items");
+  reps_container.forEach(function(container) {
+    let reps = container.querySelectorAll(".ga-members-item"); 
+    reps.forEach(function(content) {
+      let memberScoreContainer = content.querySelector(".link-block").querySelector(".ga-member-block").querySelector(".ga-member-score")
+      let memberGrade = memberScoreContainer.innerHTML;
+      if (memberGrade == 'A' || memberGrade == 'A+') {
+          memberScoreContainer.style.background = '#52A845';
+      }
+    });
   });
 }
