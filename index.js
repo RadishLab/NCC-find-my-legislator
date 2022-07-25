@@ -129,13 +129,16 @@ function normalizedInput(result) {
   let officials_html = "";
 
 
-  let districts = [];
+  let found_reps = [];
 
   officials_html += "<button onclick=\"toggleDebugInfo()\">Debug Info</button>";
   officials_html += "<div id=\"debug_content\" style=\"display:none; backgroud-color:#eee\">";
 
   officials.forEach(function (official, i) {
-    districts.push(returnDistrict(result.offices[i].divisionId));
+    let rep_data = { };
+    rep_data["rep_name"] = official.name;
+    rep_data["rep_district"] = returnDistrict(result.offices[i].divisionId);
+    found_reps.push(rep_data);
     officials_html += "<p>Name: <b>" + official.name + "</b></p>";
     officials_html += "<p>Role: " + returnRoleString(result.offices[i].roles[0]) + "</p>";
     officials_html += "<p>District: " + returnDistrict(result.offices[i].divisionId) + "</p>";
@@ -144,10 +147,10 @@ function normalizedInput(result) {
   officials_html += "</div>";
 
   console.log('========================');
-  console.log(districts);
+  console.log(found_reps);
   console.log('========================');
 
-  revealReps(districts);
+  revealReps(found_reps);
 
   return officials_html;
 }
@@ -184,15 +187,20 @@ function returnRoleString(roleStr) {
  * This function reveal the representative div contents
  * If is present in the API results
  */
-function revealReps(districts) {
+function revealReps(found_reps) {
   let reps_container = document.querySelectorAll(".ga-members-list-wrapper .w-dyn-items");
   reps_container.forEach(function(container) {
     let reps = container.querySelectorAll(".ga-members-item"); 
     reps.forEach(function(content) {
       let memberDistrict = content.querySelector(".c-district").querySelector(".district-number").innerHTML;
-      if(districts.includes(memberDistrict)) {
-        content.style.display = "block";
-      }
+      let memberName = content.querySelector(".ga-member-info-block").querySelector("h5").innerHTML;
+      let memberLastName = memberName.split(' ').slice(-1).join(' ');
+      found_reps.forEach(function(current_rep) {
+        let current_rep_last_name = current_rep.rep_name.split(' ').slice(-1).join(' ');
+        if(current_rep.rep_district == memberDistrict && current_rep_last_name == memberLastName) {
+          content.style.display = "block";
+        }
+      });
     });
   });
 }
