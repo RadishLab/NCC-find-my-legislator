@@ -130,6 +130,9 @@ function normalizedInput(result) {
 
   let found_reps = [];
 
+  officials_html += "<button onclick=\"toggleDebugInfo()\">Debug Info</button>";
+  officials_html += "<div id=\"debug_content\" style=\"display:none; backgroud-color:#eee\">";
+
   officials.forEach(function (official, i) {
     let rep_data = { };
     rep_data["rep_name"] = official.name;
@@ -145,6 +148,18 @@ function normalizedInput(result) {
   revealReps(found_reps);
 
   return officials_html;
+}
+
+/**
+ * Show/Hide debug info box
+ */
+function toggleDebugInfo() {
+  var x = document.getElementById("debug_content");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
 
 /**
