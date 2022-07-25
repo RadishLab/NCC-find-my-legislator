@@ -130,7 +130,6 @@ function normalizedInput(result) {
 
   let found_reps = [];
 
-  officials_html += "<button onclick=\"toggleDebugInfo()\">Debug Info</button>";
   officials_html += "<div id=\"debug_content\" style=\"display:none; backgroud-color:#eee\">";
 
   officials.forEach(function (official, i) {
@@ -156,7 +155,7 @@ function normalizedInput(result) {
 function toggleDebugInfo() {
   var x = document.getElementById("debug_content");
   if (x.style.display === "none") {
-    x.style.display = "block";
+    return;
   } else {
     x.style.display = "none";
   }
