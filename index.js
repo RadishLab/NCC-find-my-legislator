@@ -29,7 +29,7 @@ if(window.attachEvent) {
 
 //Load Client
 function loadClient() {
-let API_KEY = "AIzaSyAJzRTiaQvUM6wvXV-rXYJJUMoh8czJgws";
+let API_KEY = "AIzaSyBezzee6s9Phm-3Psquy8w_pGY9xfeLlE4";
 gapi.client.setApiKey(API_KEY);
 return gapi.client.load("https://civicinfo.googleapis.com/$discovery/rest?version=v2")
     .then(function() { console.log("GAPI client loaded for API"); revealForm(); },
