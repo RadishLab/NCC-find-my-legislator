@@ -230,3 +230,17 @@ function revealReps(found_reps) {
     });
   });
 }
+
+/**
+ * Autocomplete Address
+ */
+ var autocomplete;
+ var options = {
+  componentRestrictions: {country: "us"}
+ };
+
+ function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+       (document.getElementById('address')), options);
+    autocomplete.addListener('place_changed', execute)
+ }
